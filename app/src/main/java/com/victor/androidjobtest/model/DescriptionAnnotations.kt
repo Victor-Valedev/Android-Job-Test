@@ -1,0 +1,3 @@
+package com.victor.androidjobtest.model
+
+class DescriptionAnnotations
