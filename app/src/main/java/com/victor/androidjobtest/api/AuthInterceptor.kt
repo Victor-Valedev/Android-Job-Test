@@ -12,8 +12,7 @@ class AuthInterceptor: Interceptor {
         val request = requestBuilder.addHeader(
             "Authorization",
             "Client-ID ${RetrofitService.TOKEN_CLIENT_ID}"
-        )
-        .build()
+        ).build()
 
 
         return chain.proceed(request)
