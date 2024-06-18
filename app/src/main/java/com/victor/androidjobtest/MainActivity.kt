@@ -64,40 +64,40 @@ class MainActivity : AppCompatActivity() {
 
             try {
                 response = imgurAPI.searchImageGallery("cats")
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
 
-            if (response != null && response.isSuccessful){
+            if (response != null && response.isSuccessful) {
 
                 val result = response.body()
-                if(result != null){
+                if (result != null) {
 
                     val list = result.data
 
                     val urlListImages = mutableListOf<String>()
 
                     list.forEach { data ->
-                        val image = data.images[0]
-                        val type = image.type
-                        if(type == "image/jpeg"){
-                            urlListImages.add(image.link)
+                        val images = data.images
+                        if (images != null && images.isNotEmpty()) {
+                            val image = images[0]
+                            val type = image.type
+                            if (type == "image/jpeg") {
+                                urlListImages.add(image.link)
+                            }
                         }
                     }
 
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         imgurImageAdapter.addList(urlListImages)
                     }
 
+                } else {
+                    Log.i("info_imgur", "ERROR DATA API")
                 }
 
-            } else{
-               Log.i("info_imgur","ERROR DATA API")
+
             }
-
-
         }
-
     }
-
 }
